@@ -1,0 +1,19 @@
+The task is to control the linear movement of an aerospace robotic arm between a 'Home' position and a 'Work' position.
+
+**Inputs:**
+- `MoveToWorkCmd` (BOOL): A momentary push button command to start moving towards the Work position.
+- `MoveToHomeCmd` (BOOL): A momentary push button command to start moving towards the Home position.
+- `AtWorkSensor` (BOOL): A sensor that is TRUE only when the arm is at the Work position.
+- `AtHomeSensor` (BOOL): A sensor that is TRUE only when the arm is at the Home position.
+- `MovementPermitted` (BOOL): A global safety signal. The arm is only allowed to move if this signal is TRUE.
+
+**Outputs:**
+- `MotorForward` (BOOL): Energizes the motor to move the arm towards the Work position.
+- `MotorReverse` (BOOL): Energizes the motor to move the arm towards the Home position.
+
+**Logic Requirements:**
+1.  Pressing `MoveToWorkCmd` should start the `MotorForward` output. The motor should remain on until the `AtWorkSensor` becomes TRUE.
+2.  Pressing `MoveToHomeCmd` should start the `MotorReverse` output. The motor should remain on until the `AtHomeSensor` becomes TRUE.
+3.  The motors should stop immediately if `MovementPermitted` becomes FALSE at any time.
+4.  `MotorForward` and `MotorReverse` must never be TRUE at the same time.
+5.  A command to move in one direction should cancel any movement in the opposite direction.
